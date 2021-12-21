@@ -1,0 +1,34 @@
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        if not grid:    #if you have an empty grid, don't run algo
+            return 0
+        
+        rows, cols = len(grid), len(grid[0])
+        visit = set()    #mark positions for cells we visited
+        islands = 0     #keep track number of islands
+        
+        def bfs(r, c):  
+            q = collections.deque()     #need a data struct for memory, so we're using a queue
+            visit.add((r, c))     #add r, c number to "visit"
+            q.append((r, c))    #add r, c to "q"
+            
+            while q:    #while our q is not empty, we are expanding our island
+                row, col = q.popleft()  #pop left from our queue; bfs method
+                #row, col = q.pop()     #pop right from our queue, dfs method
+                directions = [[1, 0], [-1, 0], [0, 1], [0, -1]]     #four directions
+                
+                for dr, dc in directions:   #dc = down column, dr = down row
+                    r, c = row + dr, col + dc
+                    if ((r) in range(rows) and 
+                        (c) in range(cols) and 
+                        grid[r][c] == "1" and
+                        (r, c) not in visit):
+                        q.append((r, c))
+                        visit.add((r, c))
+        
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == "1" and (r, c) not in visit:    #if we encounter a 0, then we do not need to do anything.  If we encounter a 1, then we +1 toward "island"
+                    bfs(r, c)
+                    islands += 1
+        return islands
