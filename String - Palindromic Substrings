@@ -1,0 +1,18 @@
+def countSubstrings(self, s: str) -> int:
+        res = 0     #keep track of number of palendrome
+        
+        for i in range(len(s)):
+            l = r = i       #have two pointers l and r, set them equal to i (for odd length palendromes)
+            while l >= 0 and r < len(s) and s[l] == s[r]:   #we found a palendrome, we increment our result, l and r pointers
+                res += 1
+                l -= 1
+                r += 1
+            
+            l = i
+            r = i + 1   #find the even length palendromes
+            while l >= 0 and r < len(s) and s[l] == s[r]:   #we found a palendrome, we increment our result, l and r pointers
+                res += 1
+                l -= 1
+                r += 1
+                
+        return res
