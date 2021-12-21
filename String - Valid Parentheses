@@ -1,0 +1,51 @@
+def isValid(self, s: str) -> bool:
+        stack = [] #list in python
+        closeToOpen = {")" : "(", "}" : "{", "]" : "["}
+        
+        for c in s:
+            if c in closeToOpen:
+                if stack and stack[-1] == closeToOpen[c]:    #check to make sure the string is not empty bc we cannot add a closing parantheses to an empty stack
+                    stack.pop()
+                else:   #parantheses do not match
+                    return False
+            else:
+                stack.append(c)     #add input c to stack
+        
+        return True if not stack else False     #return true if stack is empty, return false if stack is not empty (brace or braces not matching)
+
+
+String - Valid Palindrome:
+
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        newStr = ""
+        
+        for c in s:
+            if c.isalnum(): #if c is alpha-numerical (consisting of or using both letters and numerals)
+                newStr += c.lower()     #convert c to lower case
+        return newStr == newStr[::-1]      #syntax for reversing a string
+    
+    
+    '''
+    def alphaNum(self, c):
+        # (ord(c)): get the ASCII value of the input c
+        
+        l, r = 0, len(s) - 1
+        
+        return (ord('A') <= ord(c) <= ord('Z') or
+                ord('a') <= ord(c) <= ord('z') or
+                ord('0') <= ord(c) <= ord('9'))
+                
+        while l < r:
+            while l < r and not self.alphaNum(s[l]):     #make sure l do not go pass r (do not go out of bound) and that both l & r characters are alphanumeric
+                l += 1
+                
+            while r > l and not self.alphaNum(s[l]):     #make sure r do not go pass l (do not go out of bound) and that both l & r characters are alphanumeric
+                r -= 1
+            
+            if s[1].lower() != s[r].lower():
+                return False
+            l, r = l + 1, r - 1
+                
+        return True
+    '''
