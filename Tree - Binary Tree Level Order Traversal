@@ -1,0 +1,24 @@
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        
+        #BFS level traversal of a binary tree
+        
+        result = [] #array for the result
+        
+        q = collections.deque() #Collections is a module, deque (doubly ended queue) is a command.  Deque is preferred over list in the cases where we need quicker append and pop operations from both the ends of container, as deque provides an O(1) time complexity for append and pop operations as compared to list which provides O(n) time complexity.
+        q.append(root) #add root list to q; This changes root from a list to a queue
+        
+        while q:
+            qLen = len(q) #get no. of nodes in q
+            level = []
+            for i in range(qLen):
+                node = q.popleft() #pop the node value of the left branch
+                if node:
+                    level.append(node.val) #take the node value and append it to the level
+                    q.append(node.left) #add the children of the node of the left branch (if any)
+                    q.append(node.right) #add the children of the node of the right branch (if any)
+            
+            if level: #make sure level is non-empty
+                result.append(level) #add level to result
+            
+        return result
