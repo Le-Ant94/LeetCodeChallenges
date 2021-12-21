@@ -1,0 +1,20 @@
+def isAnagram(self, s: str, t: str) -> bool:
+        
+        #use 2 hashmaps: 1 for s and 1 for t, space complexity is O(t+s)
+        if len(s) != len(t): #edge case to check if the lenghts of s and t are the same; if not, then they are not anagram
+            return False
+        
+        countS, countT = {}, {} #creating hashmaps in Python
+        
+        for i in range(len(s)):             #scan thru hashmap for character
+            countS[s[i]] = 1 + countS.get(s[i], 0)     #if the key s[i] is not in countS, then return the default value 0
+            countT[t[i]]= 1 + countT.get(t[i], 0)
+        for c in countS:                    #scan thru hashmap for number of character
+            if countS[c] != countT.get(c,0):  #check if number of character are not the same; if not the same, return false
+                return False
+        
+        return True
+        
+    '''
+    return sorted(s) == sorted(t)
+    '''
