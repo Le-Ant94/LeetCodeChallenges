@@ -1,0 +1,19 @@
+def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        #Time complexity: O(m*n*26) or simplified as O(m*n) for m is the total number of input string given, n is the avg length of a string, 26 is length of count array (26 char in alphabet)
+        res = defaultdict(list) #hashmap that maps charCount to list of Anagrams
+        
+        for s in strs:
+            count = [0] * 26 #a...z
+            
+            for c in s:
+                count[ord(c) - ord("a")] += 1     #ASCII value of the input char subtract the ASCII value of char "a"
+                
+                '''
+                for ex:
+                a = 80 -> 0, 80 - 80
+                b = 81 -> 1, 81 - 80
+                '''
+                
+            res[tuple(count)].append(s)     #group all anagrams in this count together; since count is a list, we change it to a tuple so it is immutible
+        
+        return res.values()
