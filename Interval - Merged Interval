@@ -1,0 +1,13 @@
+def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        # O(nLogn)
+        intervals.sort(key = lambda i : i[0])  #i stands for interval, sort by start value in the interval only
+        output = [intervals[0]]
+        
+        for start, end in intervals[1:]:  
+            lastEnd = output[-1][1]   #get the most recently added interval and the end value of it
+            
+            if start <= lastEnd:    #if the starting value in the interval is lesser or equal than the last value of the previous interval...
+                output[-1][1] = max(lastEnd, end)   #... then output the larger value between the last value of the previous interval and the end value of the current interval
+            else:                   #if the starting value in the interval is greater than the last value of the previous interval...
+                output.append([start,end])     #... then output the start and end value of the current interval
+        return output
