@@ -1,0 +1,18 @@
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        dummy = ListNode(0, head)   #creating a dummy node with a value "0" and starting point at the head of linked list
+        left, right = dummy, head        
+
+        while n > 0 and right:
+            right = right.next  #shift right pointer by 1
+            n -= 1              #decrement n by 1
+            
+        while right:
+            left = left.next
+            right = right.next
+        
+        #skip a node
+        left.next = left.next.next
+        # left pointer is at 1, and moving on to 2 next, but I want left pointer to skip 2 and move to three
+        # 1 -> 2 -> 3
+        return dummy.next
