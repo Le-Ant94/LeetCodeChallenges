@@ -1,0 +1,17 @@
+def characterReplacement(self, s: str, k: int) -> int:
+        #Time complexity O(n) solution
+        count = {}    #create a hashmap to count the number of each character (ex: A repeats 2 times, B repeats 3 times)
+        res = 0         #the longest substring we can create with k replacements
+        
+        l = 0
+        maxf = 0
+        for r in range(len(s)):
+            count[s[r]] = 1 + count.get(s[r], 0)    #update our result; r is the character in the result
+            maxf = max(maxf, count[s[r]])
+            
+            while (r - l + 1) - maxf > k: #while the window is not valid e.i. get the length of the window subtracted by the number of most frequent character, and the result is less than the number of k replacements
+                count[s[l]] -= 1                    #substract 1 from count
+                l += 1                          #shift left pointer 1 place
+                                
+            res = max(res, r - l + 1)
+        return res
