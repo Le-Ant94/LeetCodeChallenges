@@ -1,0 +1,50 @@
+def maxDepth(self, root: Optional[TreeNode]) -> int:
+        
+        #with recursion (with DFS)
+        
+        if not root: #Base case: if root is NULL, then return 0.
+            return 0
+        
+        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))  #recursive; call upon itself
+    
+    
+        '''
+        without recursion (with BFS)
+        
+        if not root:
+            return 0
+            
+        level = 0
+        q = deque([root])
+        while q:
+            
+            for i in range(len(q)):
+                node = q.popleft()          #replace the first level...
+                if node.left:
+                    q.append(node.left)     #... and replace it with its children
+                if node.right:
+                    q.append(node.right)
+                    
+            level += 1
+        '''
+        
+        
+        '''
+        without recursion (with DFS)
+        
+        if not root:
+            return 0
+            
+        stack = [[root, 1]]
+        result = 0
+        
+        while stack:
+            node, depth = stack.pop()
+            
+            if node:
+                result = max(result, depth)
+                stack.extend([node.left, depth +1])
+                stack.append([node.right, depth +1])
+        
+        return result
+        '''
