@@ -1,0 +1,14 @@
+def productExceptSelf(self, nums: List[int]) -> List[int]:
+        res = [1] * (len(nums))  #make a "res" array, set the first position an initial value of 1, then multiply by length of list "nums"
+        
+        prefix = 1      #set the prefix to 1
+        for i in range(len(nums)):
+            res[i] = prefix     #save the first result as the prefix
+            prefix *= nums[i]  #then multiply the input array value nums[i] with the prefix
+            
+        postfix = 1     #set the post fix to 1
+        for i in range(len(nums) -1, -1, -1):    #iterate back to the beginning of the array
+            res[i] *= postfix   #multiply the result (from above when computing prefix) with the postfix
+            postfix *= nums[i]  #multiply the postfix with the input array value nums[i]
+
+        return res
