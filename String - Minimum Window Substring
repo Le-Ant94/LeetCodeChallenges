@@ -1,0 +1,34 @@
+def minWindow(self, s: str, t: str) -> str:
+        #Time complexity O(n) - use 2 hashmaps: one to keep track the char count in "t" (need the char), and one to keep track the char count in a sliding window in "s" (have the char)
+        if t == "": return ""   #edge case: as the problem stated, if "t" is empty, then just return an empty string
+        
+        countT, window = {}, {}
+        
+        for c in t:     #c = character
+            countT[c] = 1 + countT.get(c, 0)    #if c is in our map, then get the value of c and store in countT.  If not, then return 0
+            
+        have, need = 0, len(countT)     #len(countT) gives us the unique char in countT
+        res, resLen = [-1, -1], float("infinity")
+        l = 0
+        
+        for r in range(len(s)):
+            c = s[r]
+            window[c] = 1 + window.get(c, 0)
+        
+            if c in countT and window[c] == countT[c]:
+                have += 1
+                
+            while have == need:
+                #found new minimum, update our result
+                if (r - l + 1) < resLen:
+                    res = [l, r]
+                    resLen = (r - l + 1)
+                    
+                #pop from the left of our window
+                window[s[l]] -= 1
+                if s[l] in countT and window[s[l]] < countT[s[l]]:
+                    have -= 1
+                l += 1
+        
+        l, r = res
+        return s[l:r+1] if resLen != float("infinity") else ""
