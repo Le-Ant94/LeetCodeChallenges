@@ -1,0 +1,28 @@
+def maxArea(self, height: List[int]) -> int:
+        
+        '''
+        #Brute Force O(n^2) solution
+        res = 0     #our result array; the max area the container of water cannot be negative, so we're starting at 0
+        
+        for l in range(len(height)):    #we're going thru every single indices of height1
+            for r in range(l + 1, len(height)):     #we're going thru every single indices of height2
+                area = (r - l) * min(height[l], height[r])  #computing the area of the containing
+                res = max(rex, area)
+        return res
+        '''
+        
+        #shrinking window
+        res = 0
+        l, r = 0, len(height) - 1
+        
+        while l < r:
+            area = (r - l) * min(height[l], height[r])
+            res = max(res, area)
+            
+            if height[l] < height[r]:   #we want to maximize height
+                l += 1                  #shifting left pointer right
+                 
+            else:                       #if the heights are equal or height left is greater than height right
+                r -= 1                  #shifting right pointer left
+                
+        return res
