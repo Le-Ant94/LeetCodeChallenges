@@ -1,0 +1,10 @@
+def maxSubArray(self, nums: List[int]) -> int:
+        maxSub = nums[0]    #initialize the array as the first value in "nums"
+        curSum = 0          #initialize the current sum
+        
+        for n in nums:
+            if curSum < 0:     #if current sum is a negative number...
+                curSum = 0      #... then set current sum = 0
+            curSum += n         #adding up numbers in nums
+            maxSub = max(maxSub, curSum)    #choose the higher number between the maximum of itself and the current sum
+        return maxSub
