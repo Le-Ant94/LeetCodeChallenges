@@ -1,0 +1,28 @@
+class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        
+        if not p and not q: #if both trees are NULL
+            return True
+                
+        if not p or not q or p.val != q.val: # if only 1 tree is NULL (so not the same) OR if the trees are not empty and not the same
+            return False
+        
+        return ((self.isSameTree(p.left, q.left)) and (self.isSameTree(p.right, q.right)))
+
+
+Invert a Binary Tree:
+
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        
+        if not root:
+            return None
+        
+        #swap the children
+        temp = root.left
+        root.left = root.right
+        root.right = temp
+        
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        
+        return root
