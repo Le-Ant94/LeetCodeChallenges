@@ -26,6 +26,8 @@ def maxDepth(self, root: Optional[TreeNode]) -> int:
                     q.append(node.right)
                     
             level += 1
+            
+        return level
         '''
         
         
