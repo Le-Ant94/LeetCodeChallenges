@@ -1,0 +1,15 @@
+#use a sorting interval first, then traverse thru the intervals once => time complexity: O(nlogn)
+        intervals.sort()
+        
+        res = 0
+        prevEnd = intervals[0][1]   #keep track of the end value of the first interval
+        
+        for start, end in intervals[1:]:    #start iterating thru the intervals once starting with the first interval
+            if start >= prevEnd:
+                prevEnd = end   #update the last end value to the new end value
+                
+            else:
+                res += 1    #remove 1 of the interval
+                prevEnd = min(end, prevEnd)     #update the last end value to the minimum value
+                
+        return res
