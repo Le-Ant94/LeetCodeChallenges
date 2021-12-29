@@ -1,0 +1,17 @@
+def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        #time complexity = O(n)
+        count = {}     #hashmap to keep count of the no. of occurences
+        freq = [[] for i in range(len(nums) + 1)]   #special (empty) array that is the same size as the input array
+        
+        for n in nums:
+            count[n] = 1 + count.get(n, 0)  #get the count of instances "n" occurs; if no "n", then return 0
+            
+        for n, c in count.items():
+            freq[c].append(n)               #"n" occurs "c" no. of times
+            
+        res = []                            #the output
+        for i in range(len(freq) - 1, 0, -1):
+            for n in freq[i]:
+                res.append(n)               #save the number "n" in the result
+                if len(res) == k:           #the size of result can only be equal to k 
+                    return res
