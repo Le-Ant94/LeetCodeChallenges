@@ -1,0 +1,14 @@
+def cloneGraph(self, node: 'Node') -> 'Node':
+        oldToNew = {}
+        
+        def dfs(node):
+            if node in oldToNew:    #if a node is already in our hashmap, then we already made a clone of it
+                return oldToNew[node]      #return the new node
+            
+            copy = Node(node.val)   #if a node is not in our hashmap, make a clone of it
+            oldToNew[node] = copy   #add the new clone to our hashmap
+            for nei in node.neighbors:  
+                copy.neighbors.append(dfs(nei))     #make a copy of every single neighbor of the node, adding them to the list of neighbors of the node
+            return copy
+        
+        return dfs(node) if node else None      #return clone graph if original graph is not empty; if empty, return Null
