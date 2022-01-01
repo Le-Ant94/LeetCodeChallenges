@@ -15,6 +15,6 @@ class Solution:
                 return False    #If not, then return False
 
             return (valid (node.left, left, node.val) and    #check that node.left (node on the left) < node.val (parent node, set to the right boundary)
-                    valid(node.right, node.val, right))      #check that node.right (node on the right) < node.val (parent node, set to the left boundary)
+                    valid (node.right, node.val, right))      #check that node.right (node on the right) < node.val (parent node, set to the left boundary)
                 
         return valid(root, float("-inf"), float("inf"))      #set boundary for the root from -infinity to infinity and return root
