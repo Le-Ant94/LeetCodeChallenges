@@ -14,7 +14,7 @@ class Solution:
             if not (node.val < right and node.val > left):  #check if node value is less than the right boundary AND node value is greater than the left boundary.
                 return False    #If not, then return False
 
-            return (valid (node.left, left, node.val) and    #check that node.left < left < node.val
-                    valid(node.right, node.val, right))      #check that node.right < node.val < right
+            return (valid (node.left, left, node.val) and    #check that node.left (node on the left) < left < node.val (parent node, set to the right boundary)
+                    valid(node.right, node.val, right))      #check that node.right (node on the right) < node.val (parent node, set to the left boundary) < right
                 
         return valid(root, float("-inf"), float("inf"))
