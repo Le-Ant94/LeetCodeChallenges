@@ -1,0 +1,42 @@
+class TrieNode:
+    def __init__(self):
+        self.children = {}      #make a hashmap to store words
+        self.endOfWord = False  #mark every single node as if it's the end of a word
+
+class Trie:
+
+    def __init__(self):
+        self.root = TrieNode()  #make an empty tree
+
+    def insert(self, word: str) -> None:
+        cur = self.root         #start saving the word char by char at root
+        
+        for c in word:
+            if c not in cur.children:   #if the char is not in the hashmap yet, means it hasn't been inserted
+                cur.children[c] = TrieNode()    #create a TrieNode for the char
+            cur = cur.children[c]       #if the char is in the hashmap, then cur position is set to that char
+        cur.endOfWord = True            #mark cur as the end of the word
+
+    def search(self, word: str) -> bool:
+        cur = self.root         #start searching the word char by char at root
+        
+        for c in word:
+            if c not in cur.children:
+                return False
+            cur = cur.children[c]
+        return cur.endOfWord
+
+    def startsWith(self, prefix: str) -> bool:
+        cur = self.root         #start searching the word char by char at root
+        
+        for c in prefix:
+            if c not in cur.children:
+                return False
+            cur = cur.children[c]
+        return True
+
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
